@@ -99,7 +99,7 @@
 .pure-material-textfield-outlined > input + span::before,
 .pure-material-textfield-outlined > textarea + span::before {
     margin-right: 1px;
-    border-left: solid 0px transparent;
+    border-left: solid 2px transparent;
     border-radius: 4px 0;
 }
 
@@ -107,7 +107,7 @@
 .pure-material-textfield-outlined > textarea + span::after {
     flex-grow: 1;
     margin-left: 1px;
-    border-right: solid 1px transparent;
+    border-right: solid 2px transparent;
     border-radius: 0 0 4px;
 }
 
@@ -246,13 +246,13 @@ body {
 }
 
 .logo {
-    margin: 20px 0;
+    margin: 10px 0;
     text-align: center;
 }
 
 .registration > label, p {
     display: block;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 .res-value{border: 2px solid rgb(var(--pure-material-primary-rgb));padding: 12px;border-radius: 4px;margin-bottom: 15px}
 .res-title{}
