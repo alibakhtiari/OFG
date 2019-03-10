@@ -38,15 +38,21 @@
     <input type="number" id="Vacancy" placeholder=" " onkeyup="getValues()" required>
     <span>فضای خالی</span>
   </label>
-  <p class="res-title">نتیجه</p>
-  <div class="res-value" id="value"></div>
+  <!--<div class="res-value" id="value"></div>-->
+  <label class="pure-material-textfield-outlined">
+  <input type="number" id="resault" readonly>
+  <span>نتیجه</span>
+  </label>
+
 
 </form>
 
   
 <script>
-  var value=0;
-  document.querySelector("#value").innerHTML = value;
+  //var value=0;
+  //document.querySelector("#value").innerHTML = value;
+  var ali =0;
+  document.getElementById('resault').value = ali;
   function getValues() {
              var rows = document.querySelectorAll(".package-row");
              rows.forEach(function (currentRow) {
@@ -58,8 +64,12 @@
  
                  z = (Size - silanderDiamter - ( 2 * Vacancy) ) / (2 * Diameter);
                  
-                 var value = Math.round(Math.PI * 0.95 * (inWidth/Diameter) * z * (silanderDiamter + (z * Diameter )));
-                 currentRow.querySelector("#value").innerHTML = value;
+                 //var value = Math.round(Math.PI * 0.95 * (inWidth/Diameter) * z * (silanderDiamter + (z * Diameter )));
+                 var resault = Math.round(Math.PI * 0.95 * (inWidth/Diameter) * z * (silanderDiamter + (z * Diameter )));
+
+                 //currentRow.querySelector("#value").innerHTML = value;
+                 document.getElementById('resault').value = resault;
+
              });
  
          }
