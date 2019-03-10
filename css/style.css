@@ -98,7 +98,7 @@
 
 .pure-material-textfield-outlined > input + span::before,
 .pure-material-textfield-outlined > textarea + span::before {
-    margin-right: 4px;
+    margin-right: 1px;
     border-left: solid 0px transparent;
     border-radius: 4px 0;
 }
@@ -106,9 +106,9 @@
 .pure-material-textfield-outlined > input + span::after,
 .pure-material-textfield-outlined > textarea + span::after {
     flex-grow: 1;
-    margin-left: 4px;
+    margin-left: 1px;
     border-right: solid 1px transparent;
-    border-radius: 0 4px;
+    border-radius: 0 0 4px;
 }
 
 /* Hover */
