@@ -242,7 +242,7 @@ body {
     overflow: hidden;
     background-color: white;
     width: 50%;
-    height: 100vh;
+    height: 80vh;
 }
 
 .logo {
@@ -255,4 +255,4 @@ body {
     margin: 10px 0;
 }
 .res-value{border: 2px solid rgb(var(--pure-material-primary-rgb));padding: 12px;border-radius: 4px;margin-bottom: 15px}
-.res-title{}
+.hidden{display:none}
