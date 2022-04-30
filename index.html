@@ -47,11 +47,12 @@
       --pure-material-safari-helper1: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
       position: relative;
       display: inline-block;
-      padding-top: 6px;
       font-family: IRANSans;
       font-size: 16px;
       line-height: 1.5;
-      overflow: hidden
+      overflow: hidden;
+      width: 100%;
+      padding-top: 6px;
     }
 
     .pure-material-textfield-outlined>input,
@@ -259,11 +260,19 @@
       margin: 10px 0
     }
 
-    .res-value {
-      border: 2px solid;
-      padding: 12px;
+    .clcHS select{
+      padding: 12px 13px;
       border-radius: 4px;
-      margin-bottom: 15px
+      margin-right: 7px;
+      margin-top: 6px;
+    }
+    .clcHS{
+      display: flex;
+
+    }
+    .clcHS .pure-material-textfield-outlined:last-child{
+      margin-right: 7px;
+
     }
   </style>
   <meta name=viewport content="width=device-width,initial-scale=1">
@@ -286,6 +295,7 @@
     </select>
     <span>ارز</span>
     </label>
+    <div class="clcHS">
     <label class="pure-material-textfield-outlined">
       <input type="number" id="Diameter" placeholder=" " onkeyup="getValues()" required>
       <span>قدرت پردازش</span>
@@ -297,28 +307,17 @@
       <option value="GH">GH/s</option>
       <option value="TH" selected="selected">TH/s</option>
     </select>
-
+  </div>
+  <div class="clcHS">
+  <label class="pure-material-textfield-outlined">
+    <input type="number" id="inWidth" placeholder=" " onkeyup="getValues()" required>
+    <span>توان مصرفی (w)</span>
+  </label>
     <label class="pure-material-textfield-outlined">
       <input type="number" id="Size" placeholder=" " onkeyup="getValues()" required>
       <span>مبنای محاسبه هزینه برق (kw/h):</span>
     </label>
-    <label class="pure-material-textfield-outlined">
-      <input type="number" id="inWidth" placeholder=" " onkeyup="getValues()" required>
-      <span>عرض داخلی قرقره</span>
-    </label>
-    <label class="pure-material-textfield-outlined">
-      <input type="number" id="silanderDiamter" placeholder=" " onkeyup="getValues()" required>
-      <span>قطر سیلندر</span>
-    </label>
-    <label class="pure-material-textfield-outlined">
-      <input type="number" id="Vacancy" placeholder=" " onkeyup="getValues()" required>
-      <span>فضای خالی</span>
-    </label>
-    <input type="number" class="hidden" placeholder=" " onfocus="blur();" required>
-    <label class="pure-material-textfield-outlined">
-      <input type="number" id="resault" readonly>
-      <span>نتیجه</span>
-    </label>
+  </div>
   </form>
   <script>
     var ali = 0;
