@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="fancyselect.min.css">
+    <style type="text/css">
+
+    .full-width select,
+    .full-width .fsb-select {
+      width: 100%;
+    }
+
+
+    .icons {
+      --fsb-border: 1px solid #ff9800;
+      --fsb-radius: 10px;
+      --fsb-padding: .75em;
+      --fsb-arrow-padding: 1em;
+      --fsb-hover-background: #ff9800;
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+      <div class="full-width icons auto-position">
+        <label for="icon-support">Custom style and icon support</label>
+        <select id="icon-support">
+          <option data-icon="demo-icons.svg#btc" value="btc" selected="selected">Bitcoin</option>
+          <option data-icon="demo-icons.svg#eth" value="eth">Ethereum</option>
+          <option data-icon="demo-icons.svg#bch" value="bch">Bitcoin Cash</option>
+          <option data-icon="demo-icons.svg#doge" value="doge">Dogecoin</option>
+          <option data-icon="demo-icons.svg#ltc" value="ltc">Litecoin</option>
+          <option data-icon="demo-icons.svg#kda" value="kda">Kadena</option>
+          <option data-icon="demo-icons.svg#dash" value="dash">Dash</option>
+        </select>
+      </div>
+    <script type="text/javascript" src="fancyselect.min.js"></script>
+  </body>
+</html>
