@@ -10,10 +10,10 @@
 </head>
 
 <body>
-  <form>
+  <form class="package-row">
     <div class="full-width icons auto-position clcHS">
-      <label for="icon-support">الگوریتم (ارز قابل استخراج)</label>
-      <select id="icon-support">
+      <label for="algo">الگوریتم (ارز قابل استخراج)</label>
+      <select id="algo">
         <option data-icon="demo-icons.svg#btc" value="btc" selected="selected">Bitcoin</option>
         <option data-icon="demo-icons.svg#eth" value="eth">Ethereum</option>
         <option data-icon="demo-icons.svg#bch" value="bch">Bitcoin Cash</option>
@@ -29,23 +29,30 @@
       <input type="number" id="c_hp" placeholder=" " onkeyup="getValues()" required>
       <span>قدرت پردازش</span>
     </label>
-    <select name="hashtype" aria-label="hashtype" id="c_hpu">
-      <option value="H">H/s</option>
-      <option value="KH">KH/s</option>
-      <option value="MH">MH/s</option>
-      <option value="GH">GH/s</option>
-      <option value="TH" selected="selected">TH/s</option>
+    <select name="hashtype" aria-label="hashtype" id="c_hpu" onchange="getValues()">
+      <option value="0">H/s</option>
+      <option value="3">KH/s</option>
+      <option value="6">MH/s</option>
+      <option value="9">GH/s</option>
+      <option value="12" selected="selected">TH/s</option>
     </select>
   </div>
   <div class="clcHS">
   <label class="pure-material-textfield-outlined">
-    <input type="number" id="c_pwu" placeholder=" " onkeyup="getValues()" required>
+    <input type="number" id="c_pw" placeholder=" " onkeyup="getValues()" required>
     <span>توان مصرفی (w)</span>
   </label>
-    <label class="pure-material-textfield-outlined">
-      <input type="number" id="c_pwu" placeholder=" " onkeyup="getValues()" required>
-      <span>مبنای محاسبه هزینه برق (kw/h):</span>
-    </label>
+  <select name="pw_price" id="c_pwu" onchange="getValues()">
+    <option value="110">صنعتی (110)</option>
+    <option value="3310">صدراتی فصل گرم (3310)</option>
+    <option value="828">صادراتی سار ایام (828)</span></option>
+    <option value="1657">متوسط صادراتی (1657)</option>
+    <option value="1140">ژنراتو گازی صادراتی (1140)</option>
+    <option value="240">پراکنده (240)</option>
+    <option value="600">خورشیدی (600)</option>
+    <option value="48">بورس انرژی (48)</option>
+    <option value="45">ژنراتور گزی صنعتی (45)</option></label>
+</select>
   </div>
   </form>
   <table>
@@ -58,30 +65,24 @@
     </thead>
     <tbody>
       <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+        <td id="c_d_i">0</td>
+        <td id="c_d_m">0</td>
+        <td id="c_d_n">0</td>
 
       </tr>
     </tbody>
   </table>
   <script type="text/javascript" src="fancyselect.min.js"></script>
   <script>
-    var ali = 0;
-    document.getElementById('resault').value = ali;
-
+    let cdi = document.getElementById('c_d_i'), cdm = document.getElementById('c_d_m'), cdn = document.getElementById('c_d_n');
     function getValues() {
-      var rows = document.querySelectorAll(".package-row");
-      rows.forEach(function (currentRow) {
-        var Diameter = Number(currentRow.querySelector('#Diameter').value);
-        var Size = Number(currentRow.querySelector('#Size').value);
-        var inWidth = Number(currentRow.querySelector('#inWidth').value);
-        var silanderDiamter = Number(currentRow.querySelector('#silanderDiamter').value);
-        var Vacancy = Number(currentRow.querySelector('#Vacancy').value);
-        z = (Size - silanderDiamter - (2 * Vacancy)) / (2 * Diameter);
-        var resault = Math.round(Math.PI * 0.95 * (inWidth / Diameter) * z * (silanderDiamter + (z * Diameter)));
-        document.getElementById('resault').value = resault
-      })
+        var hashPw = Number(document.querySelector('#c_hp').value),
+            hashUnit = Number(document.querySelector('#c_hpu').value),
+            powerUse = Number(document.querySelector('#c_pw').value),
+            powerUseBase = Number(document.querySelector('#c_pwu').value),
+            res=0;
+        res = (hashPw * Math.pow(10,hashUnit));
+        cdi.innerText = res;
     }
   </script>
 </body>
