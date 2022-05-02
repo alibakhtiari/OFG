@@ -1,3 +1,11 @@
+form {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: #FFAB40;
+  border-radius: 7px;
+  
+}
 .fsb-original-select {
     display: inline-block;
     margin: 0;
@@ -192,7 +200,7 @@ select[disabled]+.fsb-select .fsb-list {
     width: 100%;
     height: inherit;
     color: #555;
-    background-color: transparent;
+    background-color: #fff;
     box-shadow: none;
     font-family: inherit;
     font-size: inherit;
@@ -370,7 +378,8 @@ select[disabled]+.fsb-select .fsb-list {
     padding: 20px 0;
 
   }
-  .icons.clcHS{      align-items: center;
+  .icons.clcHS{      
+    align-items: center;
 }
   .clcHS .pure-material-textfield-outlined:last-child{
     margin-right: 7px;
@@ -378,5 +387,56 @@ select[disabled]+.fsb-select .fsb-list {
   }
   .icons.clcHS label {
     flex: 1 0 auto;
+    color: #fff;
   }
-  .icons.clcHS .fsb-select{width: 80%;}
+  .icons.clcHS .fsb-select{width: 70%;}
+  @media only screen and (max-width: 600px) {
+    .icons.clcHS{display: block;text-align: center;}
+    .icons.clcHS .fsb-select{width: 100%;}
+    
+  }
+
+
+  table {
+    border-spacing: 0;
+    background: white;
+    overflow: hidden;
+    max-width: 90%;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    border: 2px solid #FF6F00;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+  table * {
+    position: relative;
+  }
+  table td, table th {
+    padding-left: 8px;
+  }
+  table thead tr {
+    height: 60px;
+    background: #FF9100;
+    color: #fff;
+    font-size: 16px;
+  }
+  table tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #FF6F00;
+  }
+  table tbody tr:last-child {
+    border: 0;
+  }
+  table td, table th {
+    text-align: center;
+  }
+  table td.l, table th.l {
+    text-align: right;
+  }
+  table td.c, table th.c {
+    text-align: center;
+  }
+  table td.r, table th.r {
+    text-align: center;
+  }

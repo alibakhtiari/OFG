@@ -6,6 +6,7 @@
   <title>OFG</title>
   <link rel="stylesheet" type="text/css" href="fancyselect.min.css">
   <meta name=viewport content="width=device-width,initial-scale=1">
+  <script>let usdtp=28904,btcinc=0.16196633347276,btcp=38070.544932346,ethinc=0.038709020139297,ethp=2784.0996320937,kdap=3.8406672685762,kdainc=2.5426718778397,dogep=0.13173455877891,dogeinc=0.0043036428506004,dcrp=56.769031409499,dcrinc=0.00035996099045394,hnsp=0.12236811029889,hnsinc=0.0033964212267639,zecp=118.6251448955,zecinc=0.029959970198117,zenp=28.74789384759,zeninc=0.033621560226439,dashp=87.25671707322,dashinc=1.4876026382277E-5,bchp=281.1625260799,bchinc=0.16737485259491,ltcp=96.803123896719,ltcinc=0.0038638722302842,xmcp=0.25591838036977,xmcinc=0.0048489798385851,lbcp=0.025991013323538,lbcinc=0.0060368808941466,etpp=0.075931362300711,etpinc=0.013826783672985,ckbp=0.0087069076968786,ckbinc=0.20069168289831</script>
 
 </head>
 
@@ -13,7 +14,7 @@
   <form class="package-row">
     <div class="full-width icons auto-position clcHS">
       <label for="algo">الگوریتم (ارز قابل استخراج)</label>
-      <select id="algo">
+      <select id="algo" onchange="algoChange()">
         <option data-icon="demo-icons.svg#btc" value="btc" selected="selected">Bitcoin</option>
         <option data-icon="demo-icons.svg#eth" value="eth">Ethereum</option>
         <option data-icon="demo-icons.svg#bch" value="bch">Bitcoin Cash</option>
@@ -34,7 +35,7 @@
       <option value="3">KH/s</option>
       <option value="6">MH/s</option>
       <option value="9">GH/s</option>
-      <option value="12" selected="selected">TH/s</option>
+      <option value="12">TH/s</option>
     </select>
   </div>
   <div class="clcHS">
@@ -58,31 +59,97 @@
   <table>
     <thead>
       <tr>
-        <th>درآمد روزانه</th>
-        <th>هزینه برق روزانه</th>
-        <th>درآمد خالص روزانه</th>
+        <th>دوره</th>
+        <th>درآمد</th>
+        <th>هزینه برق</th>
+        <th>درآمد خالص</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td id="c_d_i">0</td>
-        <td id="c_d_m">0</td>
-        <td id="c_d_n">0</td>
-
+        <th>روزانه</th>
+          <td id="c_d_i">0<br>($0)</td>
+          <td id="c_d_m">0</td>
+          <td id="c_d_n">0</td>
+      </tr>
+      <tr>
+        <th>ماهانه</th>
+          <td id="c_d_i_m">0<br>($0)</td>
+          <td id="c_d_m_m">0</td>
+          <td id="c_d_n_m">0</td>
+      </tr>
+      <tr>
+        <th>سالانه</th>
+          <td id="c_d_i_y">0<br>($0)</td>
+          <td id="c_d_m_y">0</td>
+          <td id="c_d_n_y">0</td>
       </tr>
     </tbody>
   </table>
   <script type="text/javascript" src="fancyselect.min.js"></script>
   <script>
-    let cdi = document.getElementById('c_d_i'), cdm = document.getElementById('c_d_m'), cdn = document.getElementById('c_d_n');
+    function numberFormatter(num){if(num>0){if(num>999&&num<1e6){return(num/1e3).toFixed(1)+'<span class="price_unit rtl"> هزار تومان</span>'}else if(num>1e6&&num<1e9){return(num/1e6).toFixed(1)+'<span class="price_unit rtl"> میلیون‌ تومان</span>'}else if(num>1e9){return(num/1e9).toFixed(1)+'<span class="price_unit rtl"> میلیارد‌ توان</span>'}else if(num<998){return num}}else{if(num>-999){return'<span>'+(Math.abs(num)).toFixed(1)+'-'+'</span>'+'<span class="price_unit"> تومان</span>'}else if(num<-1e3&&num>-1e6){return'<span>'+(Math.abs(num)/1e3).toFixed(1)+'-'+'</span>'+'<span class="price_unit"> هزار تومان</span>'}else if(num<-1e6&&num>-1e9){return'<span>'+(Math.abs(num)/1e6).toFixed(1)+'-'+'</span>'+'<span class="price_unit"> میلیون‌ تومان</span>'}else if(num>-1e12){return'<span>'+(Math.abs(num)/1e9).toFixed(1)+'-'+'</span>'+'<span class="price_unit"> میلیارد‌ تومان</span>'}}}
+    let cdi = document.getElementById('c_d_i'),
+        cdim = document.getElementById('c_d_i_m'),
+        cdiy = document.getElementById('c_d_i_y'),
+        cdm = document.getElementById('c_d_m'),
+        cdmm = document.getElementById('c_d_m_m'),
+        cdmy = document.getElementById('c_d_m_y'),
+        cdn = document.getElementById('c_d_n'),
+        cdnm = document.getElementById('c_d_n_m'),
+        cdny = document.getElementById('c_d_n_y'),
+        cIncome = btcinc, hashConstant = 1e12;
     function getValues() {
         var hashPw = Number(document.querySelector('#c_hp').value),
             hashUnit = Number(document.querySelector('#c_hpu').value),
             powerUse = Number(document.querySelector('#c_pw').value),
             powerUseBase = Number(document.querySelector('#c_pwu').value),
             res=0;
-        res = (hashPw * Math.pow(10,hashUnit));
-        cdi.innerText = res;
+        res = parseFloat(hashPw * Math.pow(10,hashUnit) * cIncome / hashConstant ).toFixed(1);
+        pwp = 0.024 * powerUseBase * powerUse;
+        cdi.innerHTML = `${numberFormatter(res*usdtp)}<br>($${parseFloat(res).toFixed(0)})`;
+        cdim.innerHTML = `${numberFormatter(res*usdtp*30)}<br>($${parseFloat(res*30).toFixed(0)})`;
+        cdiy.innerHTML = `${numberFormatter(res*usdtp*365)}<br>($${parseFloat(res*365).toFixed(0)})`;
+        cdm.innerHTML = numberFormatter(pwp);
+        cdmm.innerHTML = numberFormatter(pwp*30);
+        cdmy.innerHTML = numberFormatter(pwp*365);
+        cdn.innerHTML = numberFormatter((res * usdtp) - pwp);
+        cdnm.innerHTML = numberFormatter((res * usdtp) * 30);
+        cdny.innerHTML = numberFormatter((res * usdtp) * 365);
+    }
+    function algoChange() {
+        var cIncome,currentAlgo = document.querySelector('#algo').value;
+        switch (currentAlgo){
+          case 'btc':
+            cIncome = btcinc;
+            hashConstant = 1e12;
+            break;
+          case 'eth':
+            cIncome = ethinc;
+            hashConstant = 1e6;
+            break;
+          case 'bch':
+            cIncome = bchinc; 
+            hashConstant = 1e12;
+            break;
+          case 'dash':
+            cIncome = dashinc;
+            hashConstant = 1e6;
+            break;
+          case 'doge':
+            cIncome = dogeinc;
+            hashConstant = 1e6;
+            break;
+          case 'ltc':
+            cIncome = ltcinc;
+            hashConstant = 1e6;
+            break;
+          case 'kda':
+            cIncome = kdainc;
+            hashConstant = 1e12;
+            break;            
+        }
+        getValues();
     }
   </script>
 </body>
